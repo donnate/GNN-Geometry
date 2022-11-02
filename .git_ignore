@@ -4,3 +4,5 @@ simulation_utils.zip
 
 # trained data
 training_results
+
+pip_requirements.sh
