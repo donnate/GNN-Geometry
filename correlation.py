@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import  seaborn as sb
 
-from foreman_curvature import *
+from forman_curvature import *
 
 
 def diffusion_dist(data, epsilon = 0.5, option = 'node'):
