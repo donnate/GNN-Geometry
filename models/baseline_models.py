@@ -4,8 +4,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 # from torch_geometric.nn import GCNConv
 
-from models.aggregation import GAPPNP
-from models.aggregation import GCNConv
+from models.operators import GAPPNP
+from models.operators import GCNConv
 
 class LogReg(nn.Module):
     def __init__(self, hid_dim, out_dim):
