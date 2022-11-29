@@ -6,7 +6,19 @@ import seaborn as sb
 from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA
 from umap import UMAP
+from torch_geometric.utils import to_networkx
+from torch_geometric.utils import from_networkx
+from utils.curvature import *
+from utils.helper import deg
 
+def visualize(h, color):
+    z = TSNE(n_components=2).fit_transform(out.detach().cpu().numpy())
+    plt.figure(figsize=(10,10))
+    plt.xticks([])
+    plt.yticks([])
+
+    plt.scatter(z[:, 0], z[:, 1], s=70, c=color, cmap="Set2")
+    plt.show()
 
 def visualize_graph(G, color, size=300):
     plt.figure(figsize=(7, 7))
@@ -135,7 +147,7 @@ trial=1, loop = True, transparency =0.4, mult = 10 ):
     deg1 = deg(edge_ind)+0.01
     # THIS MAKES A GRID and figure size as (width, height) in inches.
     fig, axs = plt.subplots(1, 4, figsize = (23,6))
-    sns.set_theme(style="whitegrid")
+    sb.set_theme(style="whitegrid")
     #cmap = plt.get_cmap("Spectral")
     norm = plt.Normalize(np.log(deg1).min(), np.log(deg1).max())
     title = 'row-normalized' if experiment == 'diffusion' else 'symmetric'
@@ -162,7 +174,7 @@ alpha = [0.2,0.5,0.8,1.0], name = 'Cora', trial=1, loop = True, transparency =0.
     deg1 = deg(data.edge_index)+0.01
     # THIS MAKES A GRID and figure size as (width, height) in inches.
     fig, axs = plt.subplots(1, 4, figsize = (23,6))
-    sns.set_theme(style="whitegrid")
+    sb.set_theme(style="whitegrid")
     #cmap = plt.get_cmap("Spectral")
     norm = plt.Normalize(np.log(deg1).min(), np.log(deg1).max())
     title = 'row-normalized' if experiment == 'diffusion' else 'symmetric'
@@ -191,7 +203,7 @@ alpha = [0.2,0.5,0.8,1.0], name = 'Cora', trial=1, loop = True, transparency =0.
     deg1 = deg(data.edge_index)+0.01
     # THIS MAKES A GRID and figure size as (width, height) in inches.
     fig, axs = plt.subplots(1, 4, figsize = (23,6))
-    sns.set_theme(style="whitegrid")
+    sb.set_theme(style="whitegrid")
     #cmap = plt.get_cmap("Spectral")
     norm = plt.Normalize(np.log(deg1).min(), np.log(deg1).max())
     title = 'row-normalized' if experiment == 'diffusion' else 'symmetric'
@@ -208,8 +220,7 @@ alpha = [0.2,0.5,0.8,1.0], name = 'Cora', trial=1, loop = True, transparency =0.
     cbar.ax.set_title("curvature")
 
     # Show the graph
-    savename = name+'_curvature'+'_'+experiment+'_'+'loop'+'_'+str(loop)+
-    '_PCA'+'.png'
+    savename = name+'_curvature'+'_'+experiment+'_'+'loop'+'_'+str(loop)+'_PCA'+'.png'
     fig.tight_layout()
     plt.savefig(savename)
     plt.show()

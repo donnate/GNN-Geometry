@@ -5,7 +5,7 @@ from IPython.core.interactiveshell import InteractiveShell
 from IPython.display import clear_output
 from functools import wraps
 
-from visualization import visualize_pca, visualize_tsne
+from utils.visualization import visualize_pca, visualize_tsne
 
 InteractiveShell.ast_node_interactivity = "all"
 mask = collections.namedtuple('mask', ('train', 'test'))
